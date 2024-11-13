@@ -37,10 +37,10 @@
     <?php
     $num1=rand(100,200);
     $num2=rand(100,200);
-    echo "<p class=text1>".($num1)."</p>";
-    echo "<p class=text2>".($num2)."</p>";
-    echo "<p class=text3>".($num1+$num2)."</p>";
-    echo "<p class=text4>".($num1*$num2)."</p>";
+    echo "<p class=text1>"."The first number in line 1:".($num1)."</p>";
+    echo "<p class=text2>"."The second number in line 2:".($num2)."</p>";
+    echo "<p class=text3>"."The sum of both variables in line 3:".($num1+$num2)."</p>";
+    echo "<p class=text4>"."The multiplication of both variables in line 4:".($num1*$num2)."</p>";
     ?>
 
 </body>
