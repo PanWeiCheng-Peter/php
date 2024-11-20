@@ -4,7 +4,7 @@
         <?php
         $time = rand(0,23);
 
-        if ($time > 5 && $time < 12) {
+        if ($time > 4 && $time < 12) {
             echo "Good Morning!" . ($time) . "</p>";
         }
         else if ($time > 11 && $time < 18) {
