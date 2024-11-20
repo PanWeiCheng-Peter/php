@@ -27,11 +27,11 @@
     $num1 = rand();
     $num2 = rand();
     if ($num1 > $num2) {
-        echo "<p class=text1>" . ($num1) . "</p>";
-        echo "<p class=text2>" . ($num2) . "</p>";
+        echo "<p class=text1>" ."Large number:". ($num1) . "</p>";
+        echo "<p class=text2>" ."Small number:". ($num2) . "</p>";
     } else {
-        echo "<p class=text1>" . ($num2) . "</p>";
-        echo "<p class=text2>" . ($num1) . "</p>";
+        echo "<p class=text1>" ."Large number:".($num2) . "</p>";
+        echo "<p class=text2>" ."Small number:".($num1) . "</p>";
     }
     ?>
 </body>
