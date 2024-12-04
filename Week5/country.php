@@ -14,6 +14,9 @@ if (isset($_GET["year"])) {
 if (isset($_GET["gender"])) {
     echo "" . $_GET["gender"] . "<br>";
 }
+if (isset($_GET["year"])) {
+    echo "Age:" . 2024-$_GET["year"] . "<br>";
+}
 ?>
 <!DOCTYPE html>
 <html>
