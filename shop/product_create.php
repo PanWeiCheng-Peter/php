@@ -49,9 +49,6 @@
                 if (empty($price)) {
                     $errors[] = "Price is required.";
                 }
-                if (empty($promotion_price)) {
-                    $errors[] = "Promotion_price is required.";
-                }
 
                 // If there are errors, display them
                 if (!empty($errors)) {
