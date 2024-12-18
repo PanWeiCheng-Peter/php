@@ -16,7 +16,7 @@
 
         <?php
         include 'config/database.php';
-        $query = "SELECT username, password, firstname, lastname, gender, dateofbirth, registerdate, accountstatus";
+        $query = "SELECT username, password, firstname, lastname, gender, dateofbirth, registrationdate, accountstatus";
         $stmt = $con->prepare($query);
         $stmt->execute();
 
@@ -24,7 +24,7 @@
         $num = $stmt->rowCount();
 
         // link to create record form
-        echo "<a href='product_create.php' class='btn btn-primary m-b-1em'>Create New Product</a>";
+        echo "<a href='customers.php' class='btn btn-primary m-b-1em'>Create New Product</a>";
 
         //check if more than 0 record found
         if ($num > 0) {
@@ -59,7 +59,7 @@
                 echo "<td>{$lastname}</td>";
                 echo "<td>{$gender}</td>";
                 echo "<td>{$dateofbirth}</td>";
-                echo "<td>{$registerdate}</td>";
+                echo "<td>{$registrationdate}</td>";
                 echo "<td>{$accountstatus}</td>";
                 echo "<td>";
                 // read one record

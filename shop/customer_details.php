@@ -46,7 +46,7 @@
             $lastname = $row['lastname'];
             $gender = $row['gender'];
             $dateofbirth = $row['dateofbirth'];
-            $registerdate = $row['registerdate'];
+            $registrationdate = $row['registrationdate'];
             $accountstatus = $row['accountstatus'];
         }
 
@@ -84,8 +84,8 @@
                 <td><?php echo $dateofbirth;  ?></td>
             </tr>
             <tr>
-                <td>Register Date</td>
-                <td><?php echo $registerdate;  ?></td>
+                <td>Registration Date</td>
+                <td><?php echo $registrationdate;  ?></td>
             </tr>
             <tr>
                 <td>Account Status</td>

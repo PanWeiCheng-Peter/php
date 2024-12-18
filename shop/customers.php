@@ -23,28 +23,31 @@
             try {
                 $username = $_POST['username'];
                 $password = $_POST['password'];
-                $first_name = $_POST['first_name'];
-                $last_name = $_POST['last_name'];
+                $firstname = $_POST['firstname'];
+                $lastname = $_POST['lastname'];
                 $gender = $_POST['gender'];
-                $Date_of_birth = $_POST['Date_of_birth'];
-                $Registration_Date = $_POST['Registration_Date'];
-                $Account_Status = $_POST['Account_Status'];
+                $dateofbirth = $_POST['dateofbirth'];
+                $registrationdate = $_POST['registrationdate'];
+                $accountstatus = $_POST['accountstatus'];
 
                 $errors = [];
-                if (empty($name)) {
-                    $errors[] = "Name is required.";
+                if (empty($username)) {
+                    $errors[] = "User Name is required.";
                 }
                 if (empty($password)) {
-                    $errors[] = "PPassword is required.";
+                    $errors[] = "Password is required.";
                 }
-                if (empty($first_name)) {
+                if (empty($firstname)) {
                     $errors[] = "First Name is required.";
                 }
-                if (empty($last_name)) {
+                if (empty($lastname)) {
                     $errors[] = "Last Name is required.";
                 }
-                if (empty($price)) {
-                    $errors[] = "Price is required.";
+                if (empty($gender)) {
+                    $errors[] = "Gender is required.";
+                }
+                if (empty($dateofbirth)) {
+                    $errors[] = "Date of Birth is required.";
                 }
 
                 // If there are errors, display them
@@ -58,16 +61,16 @@
                     // Insert query
 
                     // insert query
-                    $query = "INSERT INTO products SET name=:name, description=:description, manufacture_date=:manufacture_date, expired_date=:expired_date, price=:price, promotion_price=:promotion_price, created=:created";
+                    $query = "INSERT INTO products SET username=:username, password=:password, firstname=:firstname, lastname=:lastname, gender=:gender, dateofbirth=:dateofbirth, created=:created";
                     // prepare query for execution
                     $stmt = $con->prepare($query);
                     // bind the parameters
-                    $stmt->bindParam(':name', $name);
-                    $stmt->bindParam(':description', $description);
-                    $stmt->bindParam(':manufacture_date', $manufacture_date);
-                    $stmt->bindParam(':expired_date', $expired_date);
-                    $stmt->bindParam(':price', $price);
-                    $stmt->bindParam(':promotion_price', $promotion_price);
+                    $stmt->bindParam(':username', $username);
+                    $stmt->bindParam(':password', $password);
+                    $stmt->bindParam(':firstname', $firstname);
+                    $stmt->bindParam(':lastname', $lastname);
+                    $stmt->bindParam(':gender', $gender);
+                    $stmt->bindParam(':dateofbirth', $dateofbirth);
                     // specify when this record was inserted to the database
                     $created = date('Y-m-d H:i:s');
                     $stmt->bindParam(':created', $created);
@@ -91,34 +94,34 @@
         <form action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>' method="post">
             <table class='table table-hover table-responsive table-bordered'>
                 <tr>
-                    <td>Name</td>
-                    <td><input type='text' name='name' class='form-control' /></td>
+                    <td>User Name</td>
+                    <td><input type='text' name='username' class='form-control' /></td>
                 </tr>
                 <tr>
-                    <td>Description</td>
-                    <td><textarea name='description' class='form-control'></textarea></td>
+                    <td>Password</td>
+                    <td><textarea name='password' class='form-control'></textarea></td>
                 </tr>
                 <tr>
-                    <td>Manufacture_date</td>
-                    <td><input type='text' name='manufacture_date' class='form-control' /></td>
+                    <td>Firstname</td>
+                    <td><input type='text' name='firstname' class='form-control' /></td>
                 </tr>
                 <tr>
-                    <td>Expired Date</td>
-                    <td><input type='text' name='expired_date' class='form-control' /></td>
+                    <td>Lastname</td>
+                    <td><input type='text' name='lastname' class='form-control' /></td>
                 </tr>
                 <tr>
-                    <td>Price</td>
-                    <td><input type='text' name='price' class='form-control' /></td>
+                    <td>Gender</td>
+                    <td><input type='text' name='gender' class='form-control' /></td>
                 </tr>
                 <tr>
-                    <td>Promotion Price</td>
-                    <td><input type='text' name='promotion_price' class='form-control' /></td>
+                    <td>Date of Birth</td>
+                    <td><input type='text' name='dateofbirth' class='form-control' /></td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>
                         <input type='submit' value='Save' class='btn btn-primary' />
-                        <a href='index.php' class='btn btn-danger'>Back to read products</a>
+                        <a href='index.php' class='btn btn-danger'>Back to read Customer Details.</a>
                     </td>
                 </tr>
             </table>
