@@ -12,14 +12,15 @@
     <!-- container -->
     <div class="container">
         <div class="page-header">
-            <h1>Read Product</h1>
+            <h1>Customer Details:</h1>
         </div>
 
         <!-- PHP read one record will be here -->
         <?php
         // get passed parameter value, in this case, the record ID
         // isset() is a PHP function used to verify if a value is there or not
-        $id = isset($_GET['id']) ? $_GET['id'] : die('ERROR: Record ID not found.');
+        $user_name = isset($_GET['id']) ? $_GET['id'] : die('ERROR: Record ID not found.');
+        echo $user_name;
 
         //include database connection
         include 'config/database.php';
@@ -27,11 +28,11 @@
         // read current record's data
         try {
             // prepare select query
-            $query = "SELECT username, password, firstname, lastname, gender, dateofbirth, registerdate, accountstatus";
+            $query = "SELECT user_name, password, firstname, lastname, gender, dateofbirth, registrationdate, accountstatus FROM customers where id = ? LIMIT 0,1";
             $stmt = $con->prepare($query);
 
             // this refer to the first question mark
-            $stmt->bindParam(1, $id);
+            $stmt->bindParam(1, $user_name);
 
             // execute our query
             $stmt->execute();
@@ -40,7 +41,6 @@
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
             // values to fill up our form
-            $username = $row['username'];
             $password = $row['password'];
             $firstname = $row['firstname'];
             $lastname = $row['lastname'];
@@ -61,7 +61,7 @@
         <table class='table table-hover table-responsive table-bordered'>
             <tr>
                 <td>Username</td>
-                <td><?php echo $username;  ?></td>
+                <td><?php echo $user_name;  ?></td>
             </tr>
             <tr>
                 <td>Password</td>
@@ -94,7 +94,7 @@
             <tr>
                 <td></td>
                 <td>
-                    <a href='index.php' class='btn btn-danger'>Back to read products</a>
+                    <a href='customer_listing.php' class='btn btn-danger'>Back to check other customers</a>
                 </td>
             </tr>
         </table>

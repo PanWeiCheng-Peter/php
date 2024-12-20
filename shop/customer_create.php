@@ -21,17 +21,15 @@
         if ($_POST) {
             include 'config/database.php';
             try {
-                $username = $_POST['username'];
+                $user_name = $_POST['user_name'];
                 $password = $_POST['password'];
                 $firstname = $_POST['firstname'];
                 $lastname = $_POST['lastname'];
                 $gender = $_POST['gender'];
                 $dateofbirth = $_POST['dateofbirth'];
-                $registrationdate = $_POST['registrationdate'];
-                $accountstatus = $_POST['accountstatus'];
 
                 $errors = [];
-                if (empty($username)) {
+                if (empty($user_name)) {
                     $errors[] = "User Name is required.";
                 }
                 if (empty($password)) {
@@ -61,11 +59,11 @@
                     // Insert query
 
                     // insert query
-                    $query = "INSERT INTO products SET username=:username, password=:password, firstname=:firstname, lastname=:lastname, gender=:gender, dateofbirth=:dateofbirth, created=:created";
+                    $query = "INSERT INTO customers SET user_name=:user_name, password=:password, firstname=:firstname, lastname=:lastname, gender=:gender, dateofbirth=:dateofbirth, registrationdate=:created";
                     // prepare query for execution
                     $stmt = $con->prepare($query);
                     // bind the parameters
-                    $stmt->bindParam(':username', $username);
+                    $stmt->bindParam(':user_name', $user_name);
                     $stmt->bindParam(':password', $password);
                     $stmt->bindParam(':firstname', $firstname);
                     $stmt->bindParam(':lastname', $lastname);
@@ -76,7 +74,7 @@
                     $stmt->bindParam(':created', $created);
                     // Execute the query
                     if ($stmt->execute()) {
-                        echo "<div class='alert alert-success'>Product was added.</div>";
+                        echo "<div class='alert alert-success'>Customer Details was saved.</div>";
                     } else {
                         echo "<div class='alert alert-danger'>Unable to save record.</div>";
                     }
@@ -95,7 +93,7 @@
             <table class='table table-hover table-responsive table-bordered'>
                 <tr>
                     <td>User Name</td>
-                    <td><input type='text' name='username' class='form-control' /></td>
+                    <td><input type='text' name='user_name' class='form-control' /></td>
                 </tr>
                 <tr>
                     <td>Password</td>
@@ -121,7 +119,7 @@
                     <td></td>
                     <td>
                         <input type='submit' value='Save' class='btn btn-primary' />
-                        <a href='index.php' class='btn btn-danger'>Back to read Customer Details.</a>
+                        <a href='customer_listing.php' class='btn btn-danger'>Back to read Customer Details.</a>
                     </td>
                 </tr>
             </table>
