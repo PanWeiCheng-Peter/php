@@ -19,7 +19,7 @@
         <?php
         // get passed parameter value, in this case, the record ID
         // isset() is a PHP function used to verify if a value is there or not
-        $user_name = isset($_GET['id']) ? $_GET['id'] : die('ERROR: Record ID not found.');
+        $user_name = isset($_GET['id']) ? $_GET['id'] : die('ERROR: Record user_name not found.');
         echo $user_name;
 
         //include database connection
@@ -28,7 +28,7 @@
         // read current record's data
         try {
             // prepare select query
-            $query = "SELECT user_name, password, firstname, lastname, gender, dateofbirth, registrationdate, accountstatus FROM customers where id = ? LIMIT 0,1";
+            $query = "SELECT user_name, password, firstname, lastname, gender, dateofbirth, registrationdate, accountstatus FROM customers WHERE user_name = ? LIMIT 0,1";
             $stmt = $con->prepare($query);
 
             // this refer to the first question mark
@@ -44,10 +44,10 @@
             $password = $row['password'];
             $firstname = $row['firstname'];
             $lastname = $row['lastname'];
-            $gender = $row['gender'];
+            $gender = ($row['gender'] == 1) ? 'Male' : 'Female';
             $dateofbirth = $row['dateofbirth'];
             $registrationdate = $row['registrationdate'];
-            $accountstatus = $row['accountstatus'];
+            $accountstatus = ($row['accountstatus'] == 1) ? 'Active' : 'Non-active';
         }
 
         // show error
@@ -94,7 +94,7 @@
             <tr>
                 <td></td>
                 <td>
-                    <a href='customer_listing.php' class='btn btn-danger'>Back to check other customers</a>
+                    <a href='index.php' class='btn btn-danger'>Back to check other customers</a>
                 </td>
             </tr>
         </table>
