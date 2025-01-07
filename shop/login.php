@@ -1,20 +1,30 @@
 <body class="d-flex align-items-center py-4 bg-body-tertiary">
     <main class="form-signin w-100 m-auto">
-        <form>
-            <img class="mb-4" src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="72"
-                height="57">
+        <form action="process_login.php" method="POST">
+            <!-- Replace the logo -->
+            <img class="mb-4" src="logo.png" alt="Logo" width="72" height="72">
+
             <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
+            <!-- Updated label for Email -->
             <div class="form-floating">
-                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                <label for="floatingInput">Email address</label>
+                <input type="text" class="form-control" id="floatingInput" name="email" placeholder="Email/Username" required>
+                <label for="floatingInput">Email/Username</label>
             </div>
             <div class="form-floating">
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password" required>
                 <label for="floatingPassword">Password</label>
             </div>
 
-            <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" id="rememberMe" name="remember_me">
+                <label class="form-check-label" for="rememberMe">Remember me</label>
+            </div>
+
+            <!-- Change background color of the Submit button -->
+            <button class="btn w-100 py-2" type="submit" style="background-color: #007BFF; color: white;">Sign in</button>
+
+            <p class="text-center mt-3"><a href="forgot_password.php">Forgot Password?</a></p>
         </form>
     </main>
 </body>
@@ -34,7 +44,7 @@
         z-index: 2;
     }
 
-    .form-signin input[type="email"] {
+    .form-signin input[type="text"] {
         margin-bottom: -1px;
         border-bottom-right-radius: 0;
         border-bottom-left-radius: 0;
