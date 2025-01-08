@@ -1,25 +1,71 @@
 <!DOCTYPE HTML>
 <html>
 
+<head>
+    <title>Login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</head>
+
 <body class="d-flex align-items-center py-4 bg-body-tertiary">
     <main class="form-signin w-100 m-auto">
-        <form>
+        <form action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>' method="post">
             <img class="mb-4" src="logo.png" alt="" width="72"
                 height="57">
             <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
             <div class="form-floating">
                 <label for="floatingInput">Email address</label>
-                <input type="Email/Username" class="form-control" id="floatingInput" placeholder="Email/Username">
+                <input name="user_name" type="Email/Username" class="form-control" id="floatingInput" placeholder="Email/Username">
             </div>
             <div class="form-floating">
                 <label for="floatingPassword">Password</label>
-                <input type="Password" class="form-control" id="floatingPassword" placeholder="Password">
+                <input name="password" type="Password" class="form-control" id="floatingPassword" placeholder="Password">
             </div>
 
             <button class="btn btn-primary w-100 py-2" type="submit" style="background-color: #ff5733; color: white;">Sign in</button>
         </form>
 </body>
+
+<?php
+
+if ($_POST) {
+    include 'config/database.php';
+    try {
+        $user_name = $_POST['user_name'];
+        $password = $_POST['password'];
+
+        $errors = [];
+        if (empty($user_name)) {
+            $errors[] = "User Name is required.";
+        }
+        if (empty($password)) {
+            $errors[] = "Password is required.";
+        }
+
+        if (!empty($errors)) {
+            echo "<div class='alert alert-danger'><ul>";
+            foreach ($errors as $error) {
+                echo "<li>{$error}</li>";
+            }
+            echo "</ul></div>";
+        } else {
+
+            $query = "SELECT * FROM customers WHERE user_name=:user_name";
+            $stmt = $con->prepare($query);
+            $stmt->bindParam(':user_name', $user_name);
+            $stmt->execute();
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            header("Location: product_listing.php");
+        }
+    } catch (PDOException $exception) {
+        die('ERROR: ' . $exception->getMessage());
+    }
+}
+?>
 
 <style>
     html,
