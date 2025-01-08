@@ -1,3 +1,6 @@
+<!DOCTYPE HTML>
+<html>
+
 <body class="d-flex align-items-center py-4 bg-body-tertiary">
     <main class="form-signin w-100 m-auto">
         <form>
@@ -46,3 +49,4 @@
         border-top-right-radius: 0;
     }
 </style>
+<html>
