@@ -44,8 +44,8 @@
             echo "<th>ID</th>";
             echo "<th>Name</th>";
             echo "<th>Description</th>";
+            echo "<th>Product Category</th>";
             echo "<th>Price</th>";
-            echo "<th>Action</th>";
             echo "</tr>";
 
             // table body will be here

@@ -104,7 +104,7 @@
                     <td></td>
                     <td>
                         <input type='submit' value='Save Changes' class='btn btn-primary' />
-                        <a href='index.php' class='btn btn-danger'>Back to read products</a>
+                        <a href='product_listing.php' class='btn btn-danger'>Back to read products</a>
                     </td>
                 </tr>
             </table>
