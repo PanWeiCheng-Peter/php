@@ -22,7 +22,7 @@
         // delete message prompt will be here
 
         // select all data
-        $query = "SELECT id, name, description, price, product_cat_name FROM products 
+        $query = "SELECT id, name, description, price, product_cat_name, promotion_price, manufacture_date, expired_date FROM products 
         INNER JOIN product_cat ON products.product_cat= product_cat.product_cat_id ORDER BY id DESC";
         $stmt = $con->prepare($query);
         $stmt->execute();
@@ -46,6 +46,9 @@
             echo "<th>Description</th>";
             echo "<th>Product Category</th>";
             echo "<th>Price</th>";
+            echo "<th>Promotion Price</th>";
+            echo "<th>Manufacture Date</th>";
+            echo "<th>Expired Date</th>";
             echo "</tr>";
 
             // table body will be here
@@ -61,6 +64,9 @@
                 echo "<td>{$description}</td>";
                 echo "<td>{$product_cat_name}</td>";
                 echo "<td>{$price}</td>";
+                echo "<td>{$promotion_price}</td>";
+                echo "<td>{$manufacture_date}</td>";
+                echo "<td>{$expired_date}</td>";
                 echo "<td>";
                 // read one record
                 echo "<a href='product_details.php?id={$id}' class='btn btn-info m-r-1em'>Read</a>";
