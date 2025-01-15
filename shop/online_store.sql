@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 15, 2025 at 04:41 AM
+-- Generation Time: Jan 15, 2025 at 05:01 AM
 -- Server version: 8.3.0
 -- PHP Version: 8.2.18
 
@@ -96,22 +96,22 @@ INSERT INTO `products` (`id`, `name`, `description`, `product_cat`, `manufacture
 
 DROP TABLE IF EXISTS `product_cat`;
 CREATE TABLE IF NOT EXISTS `product_cat` (
-  `product_cat_id` int NOT NULL,
+  `product_cat_id` int NOT NULL AUTO_INCREMENT,
   `product_cat_name` varchar(30) NOT NULL,
-  `product_cat_description` text NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf16;
+  `product_cat_description` text NOT NULL,
+  PRIMARY KEY (`product_cat_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf16;
 
 --
 -- Dumping data for table `product_cat`
 --
 
 INSERT INTO `product_cat` (`product_cat_id`, `product_cat_name`, `product_cat_description`) VALUES
-(0, 'sport', ''),
-(0, 'hobby', ''),
-(0, 'time', ''),
-(2, 'bags', 'RM200, purple'),
-(0, 'fruit', ''),
-(1, 'fruit', '');
+(1, 'sport', ''),
+(2, 'hobby', ''),
+(3, 'time', ''),
+(4, 'bags', 'RM200, purple'),
+(5, 'fruit', '');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
