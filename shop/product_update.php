@@ -26,7 +26,7 @@
         // read current record's data
         try {
             // prepare select query
-            $query = "SELECT id, name, description, price FROM products WHERE id = ? LIMIT 0,1";
+            $query = "SELECT id, name, description, price, promotion_price FROM products WHERE id = ? LIMIT 0,1";
             $stmt = $con->prepare($query);
 
             // this is the first question mark
@@ -42,6 +42,7 @@
             $name = $row['name'];
             $description = $row['description'];
             $price = $row['price'];
+            $promotion_price = $row['promotion_price'];
         }
 
         // show error
@@ -70,6 +71,7 @@
                 $stmt->bindParam(':name', $name);
                 $stmt->bindParam(':description', $description);
                 $stmt->bindParam(':price', $price);
+                $stmt->bindParam(':promotion_price', $promotion_price);
                 $stmt->bindParam(':id', $id);
                 // Execute the query
                 if ($stmt->execute()) {
@@ -99,6 +101,10 @@
                 <tr>
                     <td>Price</td>
                     <td><input type='text' name='price' value="<?php echo $price;  ?>" class='form-control' /></td>
+                </tr>
+                <tr>
+                    <td>Promotion Price</td>
+                    <td><input type='text' name='promotion_price' value="<?php echo $promotion_price;  ?>" class='form-control' /></td>
                 </tr>
                 <tr>
                     <td></td>
