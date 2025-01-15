@@ -33,6 +33,7 @@
 <?php
 
 if ($_POST) {
+
     include 'config/database.php';
     try {
         $user_name = $_POST['user_name'];
