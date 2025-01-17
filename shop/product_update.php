@@ -26,7 +26,7 @@
         // read current record's data
         try {
             // prepare select query
-            $query = "SELECT id, name, description, price, promotion_price FROM products WHERE id = ? LIMIT 0,1";
+            $query = "SELECT id, name, description, price, promotion_price, manufacture_date, expired_date FROM products WHERE id = ? LIMIT 0,1";
             $stmt = $con->prepare($query);
 
             // this is the first question mark
@@ -43,6 +43,8 @@
             $description = $row['description'];
             $price = $row['price'];
             $promotion_price = $row['promotion_price'];
+            $manufacture_date = $row['manufacture_date'];
+            $expired_date = $row['expired_date'];
         }
 
         // show error
@@ -106,6 +108,15 @@
                     <td>Promotion Price</td>
                     <td><input type='text' name='promotion_price' value="<?php echo $promotion_price;  ?>" class='form-control' /></td>
                 </tr>
+                <tr>
+                    <td>Manufacture Date</td>
+                    <td><input type='text' name='manufacture_date' value="<?php echo $manufacture_date;  ?>" class='form-control' /></td>
+                </tr>
+                <tr>
+                    <td>Expired Date</td>
+                    <td><input type='text' name='expired_date' value="<?php echo $expired_date;  ?>" class='form-control' /></td>
+                </tr>
+                <tr>
                 <tr>
                     <td></td>
                     <td>

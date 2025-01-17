@@ -60,16 +60,17 @@ if ($_POST) {
             $stmt->bindParam(':user_name', $user_name);
             $stmt->execute();
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            $num = $stmt->rowCount(); 
+            $num = $stmt->rowCount();
 
             if ($num > 0) {
-                ($password == $row['password']) {
-                $_SESSION['user_name'] = $row['user_name'];
-                $_SESSION['password'] = $row['password'];
+                if ($password == $row['password']) {
+                    $_SESSION['user_name'] = $row['user_name'];
+                    $_SESSION['password'] = $row['password'];
 
-                header("Location: product_listing.php");
-                exit;
-            } }else {
+                    header("Location: product_listing.php");
+                    exit;
+                }
+            } else {
                 echo "<div class='alert alert-danger'>Invalid username or password.</div>";
             }
         }
