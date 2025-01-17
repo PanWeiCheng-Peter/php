@@ -31,15 +31,17 @@
 </body>
 
 <?php
+session_start();
 
 if ($_POST) {
-
     include 'config/database.php';
+
     try {
         $user_name = $_POST['user_name'];
         $password = $_POST['password'];
 
         $errors = [];
+
         if (empty($user_name)) {
             $errors[] = "User Name is required.";
         }
@@ -54,8 +56,7 @@ if ($_POST) {
             }
             echo "</ul></div>";
         } else {
-
-            $query = "SELECT * FROM customers WHERE user_name =:user_name";
+            $query = "SELECT * FROM customers WHERE user_name = :user_name";
             $stmt = $con->prepare($query);
             $stmt->bindParam(':user_name', $user_name);
             $stmt->execute();
@@ -64,14 +65,17 @@ if ($_POST) {
 
             if ($num > 0) {
                 if ($password == $row['password']) {
+                    $_SESSION['user_id'] = $row['id'];
                     $_SESSION['user_name'] = $row['user_name'];
-                    $_SESSION['password'] = $row['password'];
+                    $_SESSION['is_logged_in'] = true;
 
                     header("Location: product_listing.php");
                     exit;
+                } else {
+                    echo "<div class='alert alert-danger'>Invalid username or password.</div>";
                 }
             } else {
-                echo "<div class='alert alert-danger'>Invalid username or password.</div>";
+                echo "<div class='alert alert-danger'>Invalid details, please enter again.</div>";
             }
         }
     } catch (PDOException $exception) {
