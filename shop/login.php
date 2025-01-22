@@ -69,7 +69,7 @@ if ($_POST) {
                     $_SESSION['user_name'] = $row['user_name'];
                     $_SESSION['userlogin'] = true;
 
-                    header("Location: product_listing.php");
+                    header("Location: menu.php");
                     exit;
                 } else {
                     echo "<div class='alert alert-danger'>Invalid username or password.</div>";
