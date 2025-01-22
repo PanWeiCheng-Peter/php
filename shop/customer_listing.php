@@ -109,7 +109,7 @@ if (!isset($_SESSION['userlogin']) || $_SESSION['userlogin'] !== true) {
                 echo "<a href='customer_details.php?id={$user_name}' class='btn btn-info m-r-1em'>Read</a>";
 
                 // we will use this links on next part of this post
-                echo "<a href='update.php?id={$user_name}' class='btn btn-primary m-r-1em'>Edit</a>";
+                echo "<a href='customer_update.php?id={$user_name}' class='btn btn-primary m-r-1em'>Edit</a>";
 
                 // we will use this links on next part of this post
                 echo "<a href='#' onclick='delete_user({$user_name});'  class='btn btn-danger'>Delete</a>";

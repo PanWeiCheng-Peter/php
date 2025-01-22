@@ -15,7 +15,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="product_create.php">Create Product</a>
+                        <a class="nav-link" href="customer_listing.php">Customer Listing</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="product_listing.php">Product Listing</a>
@@ -24,7 +24,10 @@
                         <a class="nav-link" href="customer_create.php">Create Customer</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="customer_listing.php">Customer Listing</a>
+                        <a class="nav-link" href="product_create.php">Create Product</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="log_out.php">Log Out</a>
                     </li>
                 </ul>
             </div>
