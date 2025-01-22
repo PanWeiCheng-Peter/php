@@ -44,7 +44,9 @@ if (!isset($_SESSION['userlogin']) || $_SESSION['userlogin'] !== true) {
                     <li class="nav-item">
                         <a class="nav-link" href="product_create.php">Create Product</a>
                     </li>
-
+                    <li class="nav-item">
+                        <a class="nav-link" href="log_out.php">Log Out</a>
+                    </li>
                 </ul>
             </div>
         </div>
