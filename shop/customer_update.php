@@ -139,8 +139,17 @@
         <!--we have our html form here where new record information can be updated-->
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"] . "?id={$user_name}"); ?>" method="post">
             <table class='table table-hover table-responsive table-bordered'>
-                <td>Password</td>
-                <td><textarea name='password' class='form-control'><?php echo $password;  ?></textarea></td>
+                <tr>
+                    <td>Old Password</td>
+                    <td><input type='text' name='old_password' value="" class='form-control' /></td>
+                </tr>
+                <tr>
+                    <td>New Password</td>
+                    <td><input type='text' name='new_password' value="" class='form-control' /></td>
+                </tr>
+                <tr>
+                    <td>Confirm Password</td>
+                    <td><input type='text' name='confirm_password' value="" class='form-control' /></td>
                 </tr>
                 <tr>
                     <td>First Name</td>
