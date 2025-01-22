@@ -67,7 +67,7 @@ if ($_POST) {
                 if ($password == $row['password']) {
                     $_SESSION['user_id'] = $row['id'];
                     $_SESSION['user_name'] = $row['user_name'];
-                    $_SESSION['is_logged_in'] = true;
+                    $_SESSION['userlogin'] = true;
 
                     header("Location: product_listing.php");
                     exit;

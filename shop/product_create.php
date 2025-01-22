@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['is_logged_in']) || $_SESSION['is_logged_in'] !== true) {
+if (!isset($_SESSION['userlogin']) || $_SESSION['userlogin'] !== true) {
     header('Location: login.php');
     exit();
 }
@@ -37,6 +37,7 @@ if (!isset($_SESSION['is_logged_in']) || $_SESSION['is_logged_in'] !== true) {
         $query = "SELECT product_cat_id, product_cat_name, product_cat_description FROM product_cat ORDER BY product_cat_id ASC";
         $stmt = $con->prepare($query);
         $stmt->execute();
+        $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         if ($_POST) {
             // include database connection
@@ -68,9 +69,7 @@ if (!isset($_SESSION['is_logged_in']) || $_SESSION['is_logged_in'] !== true) {
                 if (empty($price)) {
                     $errors[] = "Price is required.";
                 }
-                if (empty($product_cat_id)) {
-                    $errors[] = "Product category ID is required.";
-                }
+                if (empty($product_cat_id)) $errors[] = "Product category is required.";
 
                 // If there are errors, display them
                 if (!empty($errors)) {
@@ -81,7 +80,7 @@ if (!isset($_SESSION['is_logged_in']) || $_SESSION['is_logged_in'] !== true) {
                     echo "</ul></div>";
                 } else {
                     // insert query
-                    $query = "INSERT INTO products SET name=:name, description=:description, manufacture_date=:manufacture_date, expired_date=:expired_date, price=:price, promotion_price=:promotion_price, created=:created";
+                    $query = "INSERT INTO products SET name=:name, description=:description, manufacture_date=:manufacture_date, expired_date=:expired_date, price=:price, promotion_price=:promotion_price, product_cat_id=:product_cat_id, created=:created";
                     // prepare query for execution
                     $stmt = $con->prepare($query);
                     // bind the parameters
@@ -91,6 +90,7 @@ if (!isset($_SESSION['is_logged_in']) || $_SESSION['is_logged_in'] !== true) {
                     $stmt->bindParam(':expired_date', $expired_date);
                     $stmt->bindParam(':price', $price);
                     $stmt->bindParam(':promotion_price', $promotion_price);
+                    $stmt->bindParam(':product_cat_id', $product_cat_id);
 
                     // specify when this record was inserted to the database
                     $created = date('Y-m-d H:i:s');
@@ -121,9 +121,6 @@ if (!isset($_SESSION['is_logged_in']) || $_SESSION['is_logged_in'] !== true) {
                 <tr>
                     <td>Description</td>
                     <td><textarea name='description' class='form-control'></textarea></td>
-                </tr>
-                <td>product_cat</td>
-                <td><textarea name='description' class='form-control'></textarea></td>
                 </tr>
                 <tr>
                     <td>Manufacture_date</td>

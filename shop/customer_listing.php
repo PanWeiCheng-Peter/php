@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['is_logged_in']) || $_SESSION['is_logged_in'] !== true) {
+if (!isset($_SESSION['userlogin']) || $_SESSION['userlogin'] !== true) {
     header('Location: login.php');
     exit();
 }
@@ -33,7 +33,7 @@ if (!isset($_SESSION['is_logged_in']) || $_SESSION['is_logged_in'] !== true) {
         $num = $stmt->rowCount();
 
         // link to create record form
-        echo "<a href='customer_create.php' class='btn btn-primary m-b-1em'>Create New Product</a>";
+        echo "<a href='customer_create.php' class='btn btn-primary m-b-1em'>Create New Customer Details</a>";
 
         //check if more than 0 record found
         if ($num > 0) {
