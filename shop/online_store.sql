@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 15, 2025 at 05:01 AM
+-- Generation Time: Jan 22, 2025 at 04:40 AM
 -- Server version: 8.3.0
 -- PHP Version: 8.2.18
 
@@ -69,24 +69,24 @@ CREATE TABLE IF NOT EXISTS `products` (
   `created` datetime NOT NULL,
   `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `products`
 --
 
 INSERT INTO `products` (`id`, `name`, `description`, `product_cat`, `manufacture_date`, `expired_date`, `price`, `promotion_price`, `created`, `modified`) VALUES
-(1, 'Basketball', 'A ball used in the NBA.', 0, '', '', 49.99, 0, '2015-08-02 12:04:03', '2024-12-28 09:31:15'),
-(3, 'Gatorade', 'This is a very good drink for athletes.', 0, '', '', 1.99, 0, '2015-08-02 12:14:29', '2015-08-05 22:59:18'),
-(4, 'Eye Glasses', 'It will make you read better.', 0, '', '', 6, 0, '2015-08-02 12:15:04', '2015-08-05 22:59:18'),
-(5, 'Trash Can', 'It will help you maintain cleanliness.', 0, '', '', 3.95, 0, '2015-08-02 12:16:08', '2015-08-05 22:59:18'),
-(6, 'Mouse', 'Very useful if you love your computer.', 0, '', '', 11.35, 0, '2015-08-02 12:17:58', '2015-08-05 22:59:18'),
-(7, 'Earphone', 'You need this one if you love music.', 0, '', '', 7, 0, '2015-08-02 12:18:21', '2015-08-05 22:59:18'),
-(8, 'Pillow', 'Sleeping well is important.', 0, '', '', 8.99, 0, '2015-08-02 12:18:56', '2015-08-05 22:59:18'),
-(9, 'Apple', 'Fresh, Red', 0, '', '', 0, 0, '2024-12-13 02:09:00', '2024-12-13 02:09:00'),
-(11, 'Cookies', 'Double Chocolate ', 0, '09/09/2024', '10/09/2026', 0, 0, '2024-12-13 03:03:58', '2024-12-13 03:03:58'),
-(12, 'Banana', 'Yellow, sweet and healthy', 0, '09/09/2024', '10/10/2024', 0, 0, '2024-12-18 06:59:40', '2024-12-18 06:59:40'),
-(13, 'Banana', 'Yellow', 0, '09/09/2024', '10/10/2024', 0, 0, '2024-12-20 04:40:18', '2024-12-20 04:40:18');
+(1, 'Basketball', 'A ball used in the NBA.', 1, '', '', 49.99, 34.99, '2015-08-02 12:04:03', '2025-01-15 06:24:41'),
+(2, 'Gatorade', 'This is a very good drink for athletes.', 2, '', '', 1.99, 0.99, '2015-08-02 12:14:29', '2025-01-15 06:24:49'),
+(3, 'Eye Glasses', 'It will make you read better.', 2, '', '', 6, 3, '2015-08-02 12:15:04', '2025-01-15 06:24:55'),
+(4, 'Trash Can', 'It will help you maintain cleanliness.', 2, '', '', 3.95, 1.99, '2015-08-02 12:16:08', '2025-01-15 06:25:06'),
+(5, 'Mouse', 'Very useful if you love your computer.', 2, '', '', 11.35, 9.45, '2015-08-02 12:17:58', '2025-01-15 06:25:13'),
+(6, 'Earphone', 'You need this one if you love music.', 2, '', '', 7, 3.99, '2015-08-02 12:18:21', '2025-01-15 06:25:19'),
+(7, 'Pillow', 'Sleeping well is important.', 2, '', '', 8.99, 6.49, '2015-08-02 12:18:56', '2025-01-15 06:25:24'),
+(8, 'Apple', 'Fresh, Red', 5, '', '', 5, 4, '2024-12-13 02:09:00', '2025-01-15 06:25:37'),
+(9, 'Cookies', 'Double Chocolate ', 4, '09/09/2024', '10/09/2026', 7.5, 5, '2024-12-13 03:03:58', '2025-01-15 06:25:44'),
+(10, 'Banana', 'Yellow, sweet and healthy', 5, '09/09/2024', '10/10/2024', 7.5, 5, '2024-12-18 06:59:40', '2025-01-15 06:25:56'),
+(11, 'Strawberry', 'Red, sour and sweet', 5, '09/09/2024', '01/10/2024', 7.5, 6, '2025-01-15 06:00:22', '2025-01-17 14:48:39');
 
 -- --------------------------------------------------------
 
@@ -110,7 +110,7 @@ INSERT INTO `product_cat` (`product_cat_id`, `product_cat_name`, `product_cat_de
 (1, 'sport', ''),
 (2, 'hobby', ''),
 (3, 'time', ''),
-(4, 'bags', 'RM200, purple'),
+(4, 'dessert ', ''),
 (5, 'fruit', '');
 COMMIT;
 
