@@ -107,26 +107,25 @@
 
                 if (!empty($old_password) || !empty($new_password) || !empty($confirm_password)) {
                     if (!empty($old_password) && !empty($new_password) && !empty($confirm_password)) {
-                        if (password_verify($old_password, $currentPassword)) {
-                            if ($new_password === $confirm_password) {
-                                $password = password_hash($new_password, PASSWORD_DEFAULT);
+                        if ($old_password == $current_password) {
+                            if ($new_password == $confirm_password) {
+                                $currentPassword = password_hash($new_password, PASSWORD_DEFAULT);
                             } else {
                                 echo "<div class='alert alert-danger'>New password and confirm password do not match.</div>";
-                                $password = $currentPassword;
+                                $password = $password;
                             }
                         } else {
                             echo "<div class='alert alert-danger'>Old password is incorrect.</div>";
-                            $password = $currentPassword;
+                            $password = $password;
                         }
                     } else {
                         echo "<div class='alert alert-danger'>Please fill all password fields to change the password.</div>";
-                        $password = $currentPassword;
+                        $password = $password;
                     }
                 } else {
                     // No password change, keep the existing password
-                    $password = $currentPassword;
+                    $password = $password;
                 }
-
 
                 $firstname = ($_POST['firstname']);
                 $lastname = ($_POST['lastname']);
@@ -165,10 +164,8 @@
                 if ($stmt->execute()) {
                     echo "<div class='alert alert-success'>Record was updated.</div>";
                 } else {
-                    $password = $row['password'];
+                    $currentPassword = $row['password'];
                 }
-
-
 
                 // show errors
             } catch (PDOException $exception) {
