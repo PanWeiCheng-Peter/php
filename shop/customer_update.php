@@ -50,17 +50,16 @@
         </div>
 
         <?php
-        // get passed parameter value, in this case, the record ID
-        // isset() is a PHP function used to verify if a value is there or not
-        $user_name = isset($_GET['id']) ? $_GET['id'] : die('ERROR: Record ID not found.');
-
         //include database connection
         include 'config/database.php';
+
+        // isset() is a PHP function used to verify if a value is there or not
+        $user_name = isset($_GET['id']) ? $_GET['id'] : die('ERROR: Record ID not found.');
 
         // read current record's data
         try {
             // prepare select query
-            $query = "SELECT user_name, password, firstname, lastname, gender, dateofbirth, registrationdate, accountstatus FROM customers WHERE user_name = ? LIMIT 0,1";
+            $query = "SELECT * FROM customers WHERE user_name = ? LIMIT 1";
             $stmt = $con->prepare($query);
 
             // this is the first question mark
@@ -72,7 +71,7 @@
             // store retrieved row to a variable
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            // values to fill up our form
+
             $password = $row['password'];
             $firstname = $row['firstname'];
             $lastname = $row['lastname'];
@@ -89,12 +88,53 @@
         ?>
 
         <?php
+        include 'config/database.php';
         // check if form was submitted
         if ($_POST) {
             try {
-                // write update query
-                // in this case, it seemed like we have so many fields to pass and
-                // it is better to label them and not use question marks
+                $query = " SELECT password FROM customers WHERE user_name = ? LIMIT 1";
+                $stmt = $con->prepare($query);
+                $stmt->bindParam(1, $user_name);
+                $stmt->execute();
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                $currentPassword = $row['password'];
+                echo $password;
+
+                // posted values
+                $old_password = $_POST['old_password'] ?? '';
+                $new_password = $_POST['new_password'] ?? '';
+                $confirm_password = $_POST['confirm_password'] ?? '';
+
+                if (!empty($old_password) || !empty($new_password) || !empty($confirm_password)) {
+                    if (!empty($old_password) && !empty($new_password) && !empty($confirm_password)) {
+                        if (password_verify($old_password, $currentPassword)) {
+                            if ($new_password === $confirm_password) {
+                                $password = password_hash($new_password, PASSWORD_DEFAULT);
+                            } else {
+                                echo "<div class='alert alert-danger'>New password and confirm password do not match.</div>";
+                                $password = $currentPassword;
+                            }
+                        } else {
+                            echo "<div class='alert alert-danger'>Old password is incorrect.</div>";
+                            $password = $currentPassword;
+                        }
+                    } else {
+                        echo "<div class='alert alert-danger'>Please fill all password fields to change the password.</div>";
+                        $password = $currentPassword;
+                    }
+                } else {
+                    // No password change, keep the existing password
+                    $password = $currentPassword;
+                }
+
+
+                $firstname = ($_POST['firstname']);
+                $lastname = ($_POST['lastname']);
+                $gender = ($_POST['gender']);
+                $dateofbirth = ($_POST['dateofbirth']);
+                $registrationdate = ($_POST['registrationdate']);
+                $accountstatus = ($_POST['accountstatus']);
+
                 $query = "UPDATE customers
                         SET password=:password, firstname=:firstname, lastname=:lastname,
                         gender=:gender, dateofbirth=:dateofbirth, registrationdate=:registrationdate, accountstatus=:accountstatus
@@ -102,7 +142,6 @@
                 // prepare query for excecution
                 $stmt = $con->prepare($query);
                 // posted values
-                $password = htmlspecialchars(strip_tags($_POST['password']));
                 $firstname = htmlspecialchars(strip_tags($_POST['firstname']));
                 $lastname = htmlspecialchars(strip_tags($_POST['lastname']));
                 $gender = htmlspecialchars(strip_tags($_POST['gender']));
@@ -112,7 +151,7 @@
 
                 // bind the parameters
                 $stmt->bindParam(':user_name', $user_name);
-                $stmt->bindParam(':password', $password);
+                $stmt->bindParam(':password', $currentPassword);
                 $stmt->bindParam(':firstname', $firstname);
                 $stmt->bindParam(':lastname', $lastname);
                 $stmt->bindParam(':gender', $gender);
@@ -126,30 +165,33 @@
                 if ($stmt->execute()) {
                     echo "<div class='alert alert-success'>Record was updated.</div>";
                 } else {
-                    echo "<div class='alert alert-danger'>Unable to update record. Please try again.</div>";
+                    $password = $row['password'];
                 }
-            }
-            // show errors
-            catch (PDOException $exception) {
+
+
+
+                // show errors
+            } catch (PDOException $exception) {
                 die('ERROR: ' . $exception->getMessage());
             }
-        } ?>
+        }
 
+        ?>
 
         <!--we have our html form here where new record information can be updated-->
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"] . "?id={$user_name}"); ?>" method="post">
             <table class='table table-hover table-responsive table-bordered'>
                 <tr>
                     <td>Old Password</td>
-                    <td><input type='text' name='old_password' value="" class='form-control' /></td>
+                    <td><input type='password' name='old_password' class='form-control' /></td>
                 </tr>
                 <tr>
                     <td>New Password</td>
-                    <td><input type='text' name='new_password' value="" class='form-control' /></td>
+                    <td><input type='password' name='new_password' class='form-control' /></td>
                 </tr>
                 <tr>
                     <td>Confirm Password</td>
-                    <td><input type='text' name='confirm_password' value="" class='form-control' /></td>
+                    <td><input type='password' name='confirm_password' class='form-control' /></td>
                 </tr>
                 <tr>
                     <td>First Name</td>
@@ -180,7 +222,7 @@
                     <td></td>
                     <td>
                         <input type='submit' value='Save Changes' class='btn btn-primary' />
-                        <a href='customer_listing.php' class='btn btn-danger'>Back to customer list.</a>
+                        <a href='customer_listing.php' class='btn btn-danger'>Back to customer list</a>
                     </td>
                 </tr>
             </table>

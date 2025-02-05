@@ -117,6 +117,11 @@
                 $stmt->bindParam(':expired_date', $expired_date);
 
                 $stmt->bindParam(':id', $id);
+
+                if ($promotion_price > $price) {
+                    echo "<div class='alert alert-danger'>Promotion price must be lower than the original price.</div>";
+                    exit;
+                }
                 // Execute the query
                 if ($stmt->execute()) {
                     echo "<div class='alert alert-success'>Record was updated.</div>";
