@@ -115,6 +115,7 @@
                 if ($stmt->execute()) {
                     echo "<div class='alert alert-success'>Record updated successfully.</div>";
                 } else {
+
                     echo "<div class='alert alert-danger'>Unable to update record.</div>";
                 }
             } catch (PDOException $exception) {
@@ -154,15 +155,15 @@
                 </tr>
                 <tr>
                     <td>Date of Birth</td>
-                    <td><input type='text' name='dateofbirth' value="<?php echo htmlspecialchars($dateofbirth); ?>" class='form-control' required /></td>
+                    <td><input type='date' name='dateofbirth' value="<?php echo htmlspecialchars($dateofbirth); ?>" class='form-control' required /></td>
                 </tr>
                 <tr>
                     <td>Registration Date</td>
-                    <td><input type='text' name='registrationdate' value="<?php echo htmlspecialchars($registrationdate); ?>" class='form-control' required /></td>
+                    <td><input type='date' name='registrationdate' value="<?php echo htmlspecialchars($registrationdate); ?>" class='form-control' required /></td>
                 </tr>
                 <tr>
                     <td>Account Status</td>
-                    <td><select name='accountstatus' class='form-control'>
+                    <td><select name='accountstatus' class='form-control' require>
                             <option value='Active' <?php echo ($accountstatus == 'Active') ? "selected" : ""; ?>>Active</option>
                             <option value='Non-Active' <?php echo ($accountstatus == 'Non-Active') ? "selected" : ""; ?>>Non-Active</option>
                         </select></td>

@@ -70,6 +70,8 @@ if (!isset($_SESSION['userlogin']) || $_SESSION['userlogin'] !== true) {
                 $lastname = $_POST['lastname'];
                 $gender = $_POST['gender'];
                 $dateofbirth = $_POST['dateofbirth'];
+                $registrationdate = $_POST['registrationdate'];
+                $accountstatus = $_POST['accountstatus'];
 
                 $errors = [];
                 if (empty($user_name)) {
@@ -90,6 +92,12 @@ if (!isset($_SESSION['userlogin']) || $_SESSION['userlogin'] !== true) {
                 if (empty($dateofbirth)) {
                     $errors[] = "Date of Birth is required.";
                 }
+                if (empty($registrationdate)) {
+                    $errors[] = "Date of Birth is required.";
+                }
+                if (empty($accountstatus)) {
+                    $errors[] = "Account Status is required.";
+                }
 
                 // If there are errors, display them
                 if (!empty($errors)) {
@@ -102,7 +110,8 @@ if (!isset($_SESSION['userlogin']) || $_SESSION['userlogin'] !== true) {
                     // Insert query
 
                     // insert query
-                    $query = "INSERT INTO customers SET user_name=:user_name, password=:password, firstname=:firstname, lastname=:lastname, gender=:gender, dateofbirth=:dateofbirth, registrationdate=:created";
+                    $query = "INSERT INTO customers SET user_name=:user_name, password=:password, firstname=:firstname, lastname=:lastname, gender=:gender, dateofbirth=:dateofbirth, 
+                    registrationdate=:registrationdate accountstatus=:accountstatus, created=:created";
                     // prepare query for execution
                     $stmt = $con->prepare($query);
                     // bind the parameters
@@ -112,6 +121,10 @@ if (!isset($_SESSION['userlogin']) || $_SESSION['userlogin'] !== true) {
                     $stmt->bindParam(':lastname', $lastname);
                     $stmt->bindParam(':gender', $gender);
                     $stmt->bindParam(':dateofbirth', $dateofbirth);
+                    $stmt->bindParam(':registrationdate', $registrationdate);
+                    $stmt->bindParam(':accountstatus', $accountstatus);
+
+
                     // specify when this record was inserted to the database
                     $created = date('Y-m-d H:i:s');
                     $stmt->bindParam(':created', $created);
@@ -156,7 +169,15 @@ if (!isset($_SESSION['userlogin']) || $_SESSION['userlogin'] !== true) {
                 </tr>
                 <tr>
                     <td>Date of Birth</td>
-                    <td><input type='text' name='dateofbirth' class='form-control' /></td>
+                    <td><input type='date' name='dateofbirth' class='form-control' /></td>
+                </tr>
+                <tr>
+                    <td>Registration Date</td>
+                    <td><input type='date' name='registrationdate' class='form-control' /></td>
+                </tr>
+                <tr>
+                    <td>Account Status</td>
+                    <td><input type='text' name='accountstatus' class='form-control' /></td>
                 </tr>
                 <tr>
                     <td></td>
