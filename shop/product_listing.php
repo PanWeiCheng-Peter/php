@@ -62,6 +62,8 @@ if (!isset($_SESSION['userlogin']) || $_SESSION['userlogin'] !== true) {
         // include database connection
         include 'config/database.php';
 
+        $search = isset($_GET['search']) ? $_GET['search'] : '';
+        $order = isset($_GET['order']) && $_GET['order'] == 'desc' ? 'DESC' : 'ASC';
         // delete message prompt will be here
 
         // select all data
